@@ -6,7 +6,6 @@ const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const Engineer = require("./lib/Engineer");
 
-
 function addStaff() {
   inquirer
     .prompt([
@@ -26,33 +25,19 @@ function addStaff() {
         name: "id",
         message: "Enter staff members ID?",
       },
+      {
+        type: "input",
+        name: "email",
+        message: "Enter staff members email?",
+      },
     ])
 
-    .then(function ({ name, role, id, email }) {
-      let roleInfo = "";
-      if (role === "Engineer") {
-        roleInfo = "GitHub username";
-      } else if (role === "Manager") {
-        roleInfo = "office phone number";
-      } else if (role === "Intern") {
-        roleInfo = "School Name";
-      }
+    .then((answers) => {
+      console.log(answers);
     });
 }
-    // inquirer.prompt ([
-    //     {
-    //         type: "input",
-    //         name: "roleInfo",
-    //         message: `Enter staff member's ${roleInfo}`,
-    //     }
-    // ])
 
-  // .then((answers) => {
-  //   console.log(answers);
-  // })
-//}
-
-function initApp() {
+function initApp() { 
   addStaff();
   //startHTML
 }
