@@ -6,9 +6,11 @@ const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const Engineer = require("./lib/Engineer");
 
-function addStaff() {
-  inquirer
-    .prompt([
+//Questions Array
+// function addStaff() {
+//   inquirer
+//     .prompt([
+    const questions = [
       {
         type: "input",
         name: "name",
@@ -16,8 +18,8 @@ function addStaff() {
       },
       {
         type: "list",
-        name: "role",
-        message: "Select the role of the staff member?",
+        name: "Title",
+        message: "What is the Employee's Title?",
         choices: ["Employee", "Engineer", "Intern", "Manager"],
       },
       {
@@ -30,15 +32,58 @@ function addStaff() {
         name: "email",
         message: "Enter staff members email?",
       },
-    ])
+      {
+        type: "input",
+        message: "what school does Employee attend?",
+        name: "school",
+        when: function (answers) {
+          return answers.Title === "Intern";
+        },
+      },
+      {
+        type: "input",
+        message: "what is Employee office number?",
+        name: "officeNumber",
+        when: function (answers) {
+          return answers.Title === "Manager";
+        },
+      },
+      {
+        type: "input",
+        message: "what is Engineer's Github account?",
+        name: "Github Account",
+        when: function (answers) {
+          return answers.Title === "Engineer";
+        },
+      },
+    ]
+  
+//Prompt for additional members?
+// function addMembers() {
+//   inquirer.prompt([
+//     {
+//       type: "list",
+//       name: "addMembers",
+//       message: "Would you like to add any additional members?",
+//       choices: ["Yes", "No"],
+//     },
+//   ]);
+// }
 
-    .then((answers) => {
-      console.log(answers);
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, (err) => {
+        if (err) throw err;
+        console.log("please work!");
     });
 }
 
-function initApp() { 
-  addStaff();
+
+//Function to initiate the app
+function initApp() {
+  inquirer.prompt(questions).then(function(userInput){
+      console.log(userInput);
+      writeToFile("index.html", generateHTML(userInput));
+  })
   //startHTML
 }
 
