@@ -1,5 +1,6 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
+const generatePage = require('./utils/generateHTML')
 
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
@@ -59,8 +60,8 @@ const Engineer = require("./lib/Engineer");
     ]
   
 //Prompt for additional members?
-// function addMembers() {
-//   inquirer.prompt([
+//function addMembers() {
+//   prompt.next([
 //     {
 //       type: "list",
 //       name: "addMembers",
@@ -68,7 +69,7 @@ const Engineer = require("./lib/Engineer");
 //       choices: ["Yes", "No"],
 //     },
 //   ]);
-// }
+
 
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) => {
