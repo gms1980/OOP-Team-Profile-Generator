@@ -1,12 +1,13 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 const generatePage = require('./utils/generate-site')
+const { writeFile, copyFile } = require('./utils/generate-site');
 
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const Engineer = require("./lib/Engineer");
-const { SIGTERM } = require("constants");
+
 
 //Questions Array
 // function addStaff() {
@@ -79,12 +80,15 @@ function writeToFile(fileName, data) {
     });
 }
 
+// function generateHTML(data) {
+//     return  $[data.title]
+//   }
 
-//Function to initiate the app
+//Function to initiate the app initApp
 function initApp() {
   inquirer.prompt(questions).then(function(userInput){
       console.log(userInput);
-      writeToFile("index.html", generateHTML(userInput));
+      writeToFile("/index.html", generateHTML(userInput));
   })
   //startHTML
 }

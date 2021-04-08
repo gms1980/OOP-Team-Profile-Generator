@@ -1,6 +1,8 @@
 const fs = require('fs');
 const { copyFile } = require('fs');
 
+
+
 const writeFile = fileContent => {
     return new Promise((resolve, reject) =>{
         //if there's an err, reject the Promise and send the error to the promise's `.catch()` method
