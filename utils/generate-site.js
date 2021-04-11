@@ -1,11 +1,13 @@
 const fs = require('fs');
-const { copyFile } = require('fs');
+const copyFile = require('fs');
 
 
 
 const generateSite = questions => {
   return 
 }
+
+
 
 // for (let i = 0; i < array.length; i++) {
 //   // array[i] is the object for the employee
