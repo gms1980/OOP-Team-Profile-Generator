@@ -12,8 +12,9 @@ const Engineer = require("./lib/Engineer");
 // function addStaff() {
 //   inquirer
 //     .prompt([
-function addMember() {
-    inquirer.prompt([
+// function addMember() {
+//     inquirer.prompt([
+    const question = [
 {
     type: "input",
     name: "name",
@@ -60,7 +61,7 @@ function addMember() {
     },
   },
 
-])}
+]//)}
 
   //   {
   //     type: "list",
@@ -71,22 +72,31 @@ function addMember() {
   //         return answers.Title ==="Questions"
   //     }
   //   },
+  function init() {
+    inquirer.prompt(question).then((startHTML) => {
+        //if (startHTML.question === "yes, start") {
+            console.log();
+        //}
+      
+      //writeToFile("./dist/index.html", generateHTML(userInput));
+    });
+  }
+  init();
+
+  //Loop for the questions array
+  const member = [
+    `Employee`,
+    `Manager`,
+    `Intern`,
+    `Engineer`,
+ ];
+ 
+ for (let i = 0; i < member.length; i++) {
+    console.log(member[i]);
+ }
 
 
-function writeToFile(fileName, data) {
-  fs.writeFile(fileName, data, (err) => {
-    if (err) throw err;
-    console.log("please work!");
-  });
-}
-
-//Function to initiate the app initApp
-function initApp() {
-    addMember();    
-}
-initApp();
-
-
+//Start HTML
 function startHTML() {
     const html = `<!DOCTYPE html>
     <html lang="en">
@@ -124,18 +134,46 @@ function startHTML() {
             <a href="#" class="card-link">Card link</a>
             <a href="#" class="card-link">Another link</a>
           </div>
-        </div>`
-        fs.writeFile("./dist/index.html", html, function(err) {
-            if (err) {
-                console.log(err);
-            }
+        </div>
+        <div class="card" style="width: 18rem">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up the
+                bulk of the card's content.
+              </p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up the
+                bulk of the card's content.
+              </p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+      </body>
+    </html>`
+    
+    function writeToFile(fileName, data) {
+        fs.writeFile("./dist/index.html", html, (err) => {
+          if (err) throw err;
+          console.log("please work!");
         });
-        console.log("start");
+      }
+        
 }
 
-fs.appendFile("/dist/index.html", data, function (err) {
-    if (err) {
-        console.log(err);
+// fs.appendFile("/dist/index.html", data, function (err) {
+//     if (err) {
+//         console.log(err);
 
-    }
-})
+//     }
+// })
