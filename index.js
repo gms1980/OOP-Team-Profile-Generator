@@ -1,7 +1,7 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 const generatePage = require("./utils/generate-site");
-const { writeFile, copyFile } = require("./utils/generate-site");
+const writeFile = require("./utils/generate-site");
 
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
@@ -20,7 +20,7 @@ const question = [
     type: "list",
     name: "Title",
     message: "What is the Employee's Title?",
-    choices: ["Employee", "Engineer", "Intern", "Manager"],
+    choices: ["Engineer", "Intern", "Manager"],
   },
   {
     type: "input",
@@ -56,114 +56,68 @@ const question = [
       return answers.Title === "Engineer";
     },
   },
+  {
+    type: "list",
+    name: "selection",
+    message: "Add another employee?",
+    choices: ["Yes", "No"],
+  },
 ];
 
 function init() {
   inquirer.prompt(question).then((answers) => {
-    console.log(answers);
     teamMembers.push(answers);
-
-    inquirer
-      .prompt([
-        {
-          type: "list",
-          name: "selection",
-          message: "Add another employee?",
-          choices: ["Yes", "No"],
-        },
-      ])
-      .then((confirm) => {
-        if (confirm.Selection === "Yes") {
-          init();
-        } else {
-          console.log(teamMembers);
-
-        }
-      });
-
-    writeToFile("./dist/index.html", generateHTML(teamMembers));
+    switch (answers.Title) {
+      case "Manager":
+        teamMembers.push(
+          new Manager(
+            answers.name,
+            answers.id,
+            answers.email,
+            answers.Title,
+            answers.officeNumber
+          )
+        );
+        return answers.selection == "Yes" ? init() : console.log(teamMembers);
+      case "Intern":
+        teamMembers.push(
+          new Intern(
+            answers.name,
+            answers.id,
+            answers.email,
+            answers.Title,
+            answers.school
+          )
+        );
+        return answers.selection == "Yes" ? init() : console.log(teamMembers);
+      case "Engineer":
+        teamMembers.push(
+          new Engineer(
+            answers.name,
+            answers.id,
+            answers.email,
+            answers.Title,
+            answers.github
+          )
+        );
+        return answers.selection == "Yes" ? init() : console.log(teamMembers);
+      // default:
+      //     return console.log("No valid options selected")
+    }
+    if (answers.selection == "Yes") {
+      init();
+    } else {
+      console.log(teamMembers);
+    }
   });
 }
+
 init();
 
-//Start HTML
-function startHTML(teamMembers) {
-//   const html = `<!DOCTYPE html>
-//     <html lang="en">
-//       <head>
-//         <meta charset="UTF-8" />
-//         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-//         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-//         <title>Portfolio Demo</title>
-//         <link
-//           rel="stylesheet"
-//           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
-//         />
-//         <!-- CSS only -->
-//         <link
-//           href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
-//           rel="stylesheet"
-//           integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
-//           crossorigin="anonymous"
-//         />
-//         <link
-//           href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap"
-//           rel="stylesheet"
-//         />
-//         <link rel="stylesheet" href="style.css" />
-//       </head>
-//       <body>
-//         <div class="card" style="width: 18rem">
-//           <div class="card-body">
-//             <h5 class="card-title">${Manager}</h5>
-//             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-//             <p class="card-text">
-//               Some quick example text to build on the card title and make up the
-//               bulk of the card's content.
-//             </p>
-//             <a href="#" class="card-link">Card link</a>
-//             <a href="#" class="card-link">Another link</a>
-//           </div>
-//         </div>
-//         <div class="card" style="width: 18rem">
-//             <div class="card-body">
-//               <h5 class="card-title">Card title</h5>
-//               <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-//               <p class="card-text">
-//                 Some quick example text to build on the card title and make up the
-//                 bulk of the card's content.
-//               </p>
-//               <a href="#" class="card-link">Card link</a>
-//               <a href="#" class="card-link">Another link</a>
-//             </div>
-//           </div>
-//           <div class="card" style="width: 18rem">
-//             <div class="card-body">
-//               <h5 class="card-title">Card title</h5>
-//               <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-//               <p class="card-text">
-//                 Some quick example text to build on the card title and make up the
-//                 bulk of the card's content.
-//               </p>
-//               <a href="#" class="card-link">Card link</a>
-//               <a href="#" class="card-link">Another link</a>
-//             </div>
-//           </div>
-//       </body>
-//     </html>`;
+async function renderHTML(file) {
+  const htmlProfilePage = render(file);
 
-  function writeToFile(fileName, data) {
-    fs.writeFile("./dist/index.html", html, (err) => {
-      if (err) throw err;
-      console.log("please work!");
-    });
-  }
+  await writeFileAsync(outputPath, htmlProfilePage).then(function () {
+    console.log("Hope this works");
+  });
 }
-
-// fs.appendFile("/dist/index.html", data, function (err) {
-//     if (err) {
-//         console.log(err);
-
-//     }
-// })
-module.exports = Index;
