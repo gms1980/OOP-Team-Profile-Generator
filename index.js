@@ -116,9 +116,24 @@ function init() {
 
 init();
 
-const buildHtml = (data) => {
-  console.log(data);
-
+const buildHtml = (data) => {  
+  let string = ""
+​
+  data.forEach(item => {
+    console.log('Item in forEach loop: ',item);
+    string += `<div class="card h-100">
+        <div class="card-header">
+            <h3>${item.name}</h3>
+            <h4>Engineer</h4><i class="material-icons">glasses</i>
+        </div>
+        <div class="card-body">
+            <p class="id">ID: ${item.id}</p>
+            // ....
+        </div>
+    </div>
+    `
+  });
+​
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -139,49 +154,7 @@ const buildHtml = (data) => {
           </nav>
       </header>
       <main>
-          <div class="container">
-              <div class="row justify-content-center" id="team-cards">
-              </div>
-          </div>
-          <div class="col-4 mt-4">
-          <div class="card h-100">
-              <div class="card-header">
-                  <h3>${data[0].name}</h3>
-                  <h4>Engineer</h4><i class="material-icons">glasses</i>
-              </div>
-              <div class="card-body">
-                  <p class="id">ID: ${data[1].id}</p>
-                  <p class="email">Email: <a href="mailto:${Engineer.email}">${Engineer.email}</a></p>
-                  <p class="github">Github: <a href="https://github.com/.github}">${Engineer.github}</a></p>
-              </div>
-          </div>
-          </div>
-      <div class="col-4 mt-4">
-      <div class="card h-100">
-          <div class="card-header">
-          <h3>${data[0].name}</h3>
-              <h4>Intern</h4><i class="material-icons">assignment_ind</i>
-          </div>
-          <div class="card-body">
-              <p class="id">ID: ${data[1].id}</p>
-              <p class="email">Email:<a href="mailto:${Intern.email}">${Intern.email}</a></p>
-              <p class="school">School: ${Intern.school}</p>
-          </div>
-      </div>
-      </div>
-      <div class="col-4 mt-4">
-      <div class="card h-100">
-          <div class="card-header">
-              <h3>${data[0].name}</h3>
-              <h4>Manager</h4><i class="material-icons">content_paste</i>
-          </div>
-          <div class="card-body">
-              <p class="id">ID: ${data[1].id}</p>
-              <p class="email">Email: <a href="mailto:${Manager.email}">${Manager.email}</a></p>
-              <p class="office">Office Number: ${Manager.officeNumber}</p>
-          </div>
-      </div>
-  </div>
+         ${string}
       </main>
   </body>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
