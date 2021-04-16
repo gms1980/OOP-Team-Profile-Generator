@@ -1,8 +1,10 @@
-.jumbotron {
+.navbar {
     background-color: red;
     text-align: center;
     color: white;
 }
-.card {
+.card-header{
     display:inline-block;
+    background-color: blue;
+    color: white;
 }

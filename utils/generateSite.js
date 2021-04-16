@@ -1,4 +1,6 @@
 
+
+
 const generateManager = function (manager) {
   return `
   <div class="col-4 mt-4">
@@ -131,6 +133,19 @@ const generateTeamPage = function (employeeCards) {
 </html>
 `;
 };
+// const generateHtml = require('./path/to/generateHtml.js');
+const writeFile = data => {
+  console.log(data)
+  fs.writeFile("./dist/index.html", buildHtml(data), err => {
+    if (err) {
+      console.log(err);
+      return;
+    } else
+    {console.log("This worked and your profile has been accepted. ")
+  }
+  })
+};
+
 
 
 // for (let i = 0; i < array.length; i++) {
