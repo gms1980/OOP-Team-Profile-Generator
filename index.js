@@ -1,7 +1,7 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
-const generatePage = require("./utils/generate-site");
-const writeFile = require("./utils/generate-site");
+const generateSite = require("./utils/generateSite");
+//const writeFile = require("./utils/generateSite");
 
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
@@ -114,10 +114,32 @@ function init() {
 
 init();
 
-async function renderHTML(file) {
-  const htmlProfilePage = render(file);
+// async function renderHTML(file) {
+//   const htmlProfilePage = render(file);
 
-  await writeFileAsync(outputPath, htmlProfilePage).then(function () {
-    console.log("Hope this works");
-  });
-}
+//   await writeFileAsync(outputPath, htmlProfilePage).then(function () {
+//     console.log("Hope this works");
+//   });
+// }
+
+const writeFile = data => {
+  fs.writeFile("./dist/index.html", data, err => {
+    if (err) {
+      console.log(err);
+      return;
+    } else
+    {console.log("this worked and your profile has been accepted. ")
+  }
+  })
+};
+// addManager()
+//   .then(addEmployee)
+//   .then(teamArray => {
+//     return generateSite(teamArray);
+//   })
+//   .then(pageHTML => {
+//     return writeFile(pageHTML);
+//   })
+//   .catch(err => {
+//  console.log(err);
+//   });
