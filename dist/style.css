@@ -4,7 +4,13 @@
     color: white;
 }
 .card-header{
-    display:inline-block;
+    
     background-color: blue;
     color: white;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
 }

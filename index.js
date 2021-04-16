@@ -1,6 +1,6 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
-const generateSite = require("./utils/generateSite");
+// const generateSite = require("./utils/generateSite");
 //const writeFile = require("./utils/generateSite");
 
 const Employee = require("./lib/Employee");
@@ -105,35 +105,40 @@ function init() {
 
         return answers.selection == "Yes" ? init() : writeFile(teamMembers);
     }
-    if (answers.selection == "Yes") {
-      init();
-    } else {
-      console.log(teamMembers);
-      writeFile(teamMembers);
-    }
+    // if (answers.selection == "Yes") {
+    //   init();
+    // } else {
+    //   console.log(teamMembers);
+    //   writeFile(teamMembers);
+    // }
   });
 }
 
 init();
 
-const buildHtml = (data) => {  
-  let string = ""
-​
-  data.forEach(item => {
-    console.log('Item in forEach loop: ',item);
-    string += `<div class="card h-100">
+const buildHtml = (data) => {
+  let string = "";
+
+  data.forEach((item) => {
+    console.log("Item in forEach loop: ", item);
+    string += `<div class="container"
+        <div class="col-4 mt-4">
+        <div class="card h-100">
         <div class="card-header">
             <h3>${item.name}</h3>
-            <h4>Engineer</h4><i class="material-icons">glasses</i>
+            <h4>${item.Title}</h4><i class="material-icons">glasses</i>
         </div>
         <div class="card-body">
             <p class="id">ID: ${item.id}</p>
-            // ....
+            <p class="email">Email:<a href="mailto:${item.email}">${item.email}</a></p>
+            <p class="school">School: ${item.school}</p>
+            
+        </div>
         </div>
     </div>
-    `
+    `;
   });
-​
+
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -175,4 +180,3 @@ const writeFile = (data) => {
     }
   });
 };
-

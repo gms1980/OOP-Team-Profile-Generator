@@ -40,7 +40,7 @@
 
 // // create Intern card
 // const generateIntern = function (intern) {
-//   return `
+// //   return `
 //   <div class="col-4 mt-4">
 //       <div class="card h-100">
 //           <div class="card-header">
